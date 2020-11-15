@@ -26,7 +26,7 @@ public class SpreadSheet implements IObserver, Depictor {
     }
 
     @Override
-    public void update(Subject o, Object updateArg) {
+    public void update(ApplicationData o, Object updateArg) {
 
         Map<String, Double> updateObj = (HashMap<String, Double>) updateArg;
 

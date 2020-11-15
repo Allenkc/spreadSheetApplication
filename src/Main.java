@@ -1,14 +1,14 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Observer;
 
 public class Main {
 
     private static final ApplicationData applicationData = new ApplicationData(new LinkedHashMap<>());
+    private static boolean spreadSheetLocked = false;
+    private static boolean barChartLocked = false;
+    private static boolean pieChartLocked = false;
+
 
     public static void main(String[] args) throws Exception {
         if (null == args[0]) {
@@ -34,21 +34,37 @@ public class Main {
             double value;
             switch (command) {
                 case DATA:
+                    if (input.length < 3) {
+                        System.out.println("Input Error");
+                        break;
+                    }
                     item = input[1];
-                    value = Double.valueOf(input[2]);
-                    applicationData.addData(item, value);
+                    try {
+
+                        value = Double.valueOf(input[2]);
+                        applicationData.addData(item, value);
+
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Input Error");
+                        break;
+                    }
+
                     break;
                 case ADD_CHART:
                     IObserver observer = checkChartType(input[1]);
                     if (null == observer) {
-                        System.out.println("Input Error");
-                        line = reader.readLine();
-                        continue;
+                        break;
                     } else {
-                        applicationData.addObserver(observer);
+                        applicationData.registerObserver(observer);
                     }
                     break;
                 case CHANGE:
+                    ChartType chartType = ChartType.toChartType(input[1]);
+
+                    if (null == chartType) {
+                        System.out.println("Input Error");
+                        break;
+                    }
                     System.out.println(input[1] + " change " + input[2] + " " + input[3] + ".");
                     item = input[2];
                     value = Double.valueOf(input[3]);
@@ -74,13 +90,34 @@ public class Main {
 
         switch (chartType) {
             case SPREAD:
-                observer = new SpreadSheet(applicationData.getData());
+                if(spreadSheetLocked){
+                    // TODO sheet數超過 是否要印出?
+                    observer = null;
+                    break;
+                }else {
+                    observer = new SpreadSheet(applicationData.getData());
+                    spreadSheetLocked = true;
+                }
                 break;
             case BAR:
-                observer = new BarChart(applicationData.getData());
+                if(barChartLocked){
+                    // TODO sheet數超過 是否要印出?
+                    observer = null;
+                    break;
+                }else {
+                    observer = new BarChart(applicationData.getData());
+                    barChartLocked = true;
+                }
                 break;
             case PIE:
-                observer = new PieChart(applicationData.getData());
+                if(pieChartLocked){
+                    // TODO sheet數超過 是否要印出?
+                    observer = null;
+                    break;
+                }else {
+                    observer = new PieChart(applicationData.getData());
+                    pieChartLocked = true;
+                }
                 break;
             default:
                 return null;

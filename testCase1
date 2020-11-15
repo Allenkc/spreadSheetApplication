@@ -1,0 +1,10 @@
+data Pizza 8
+data Computer 5
+data Bird 1
+data Piggy 9
+data Huffman 7
+data Cheese 0
+addChart Spreadsheet
+addChart BarChart
+addChart PieChart
+change Spreadsheet Bird 3
