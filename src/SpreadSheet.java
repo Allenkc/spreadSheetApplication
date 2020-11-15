@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SpreadSheet implements Observer, Depictor {
+public class SpreadSheet implements IObserver, Depictor {
 
     private Map<String, Double> data;
 
@@ -20,18 +20,13 @@ public class SpreadSheet implements Observer, Depictor {
 
         for (Map.Entry<String, Double> entry : this.data.entrySet()) {
             System.out.print(entry.getKey());
-            System.out.println(" " + String.valueOf((int)(double)entry.getValue()));
+            System.out.println(" " + ((int) (double) entry.getValue()));
         }
 
     }
 
     @Override
-    public void change(String item, double value) {
-
-    }
-
-    @Override
-    public void update(Observable o, Object updateArg) {
+    public void update(Subject o, Object updateArg) {
 
         Map<String, Double> updateObj = (HashMap<String, Double>) updateArg;
 

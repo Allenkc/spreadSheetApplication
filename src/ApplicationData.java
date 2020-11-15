@@ -1,8 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
-public class ApplicationData extends Observable {
+public class ApplicationData extends Subject {
 
     private Map<String , Double> data;
 
@@ -33,9 +32,4 @@ public class ApplicationData extends Observable {
         notifyObservers(updateObj);
     }
 
-    @Override
-    public void notifyObservers(Object arg) {
-        super.notifyObservers(arg);
-
-    }
 }

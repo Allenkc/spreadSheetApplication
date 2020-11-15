@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class BarChart implements Observer, Depictor {
+public class BarChart implements IObserver, Depictor {
 
     private Map<String, Double> data;
 
@@ -28,12 +28,7 @@ public class BarChart implements Observer, Depictor {
     }
 
     @Override
-    public void change(String item, double value) {
-
-    }
-
-    @Override
-    public void update(Observable o, Object updateArg) {
+    public void update(Subject o, Object updateArg) {
 
         Map<String, Double> updateObj = (HashMap<String, Double>) updateArg;
 

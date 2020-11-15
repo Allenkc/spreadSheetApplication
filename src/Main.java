@@ -36,23 +36,23 @@ public class Main {
                 case DATA:
                     item = input[1];
                     value = Double.valueOf(input[2]);
-                    applicationData.addData(item , value);
+                    applicationData.addData(item, value);
                     break;
                 case ADD_CHART:
-                    Observer observer = checkChartType(input[1]);
-                    if(null == observer){
+                    IObserver observer = checkChartType(input[1]);
+                    if (null == observer) {
                         System.out.println("Input Error");
                         line = reader.readLine();
                         continue;
-                    }else {
+                    } else {
                         applicationData.addObserver(observer);
                     }
                     break;
                 case CHANGE:
-                    System.out.println(input[1] +" change " + input[2] +" " +input[3]);
+                    System.out.println(input[1] + " change " + input[2] + " " + input[3] + ".");
                     item = input[2];
                     value = Double.valueOf(input[3]);
-                    applicationData.changeData(item , value);
+                    applicationData.changeData(item, value);
                     break;
             }
 
@@ -61,7 +61,7 @@ public class Main {
 
     }
 
-    private static Observer checkChartType(String charTypeStr) {
+    private static IObserver checkChartType(String charTypeStr) {
 
         ChartType chartType = ChartType.toChartType(charTypeStr);
 
@@ -70,7 +70,7 @@ public class Main {
             return null;
         }
 
-        Observer observer;
+        IObserver observer;
 
         switch (chartType) {
             case SPREAD:
