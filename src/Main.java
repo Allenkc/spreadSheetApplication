@@ -26,35 +26,44 @@ public class Main {
             CommandType command = CommandType.toCommandType(input[0]);
             if (null == command) {
                 System.out.println("Input Error");
+                line = reader.readLine();
                 continue;
             }
 
+            String item;
+            double value;
             switch (command) {
                 case DATA:
-                    String item = input[1];
-                    double value = Double.valueOf(input[2]);
+                    item = input[1];
+                    value = Double.valueOf(input[2]);
                     applicationData.addData(item , value);
                     break;
                 case ADD_CHART:
                     Observer observer = checkChartType(input[1]);
                     if(null == observer){
                         System.out.println("Input Error");
+                        line = reader.readLine();
                         continue;
                     }else {
                         applicationData.addObserver(observer);
                     }
                     break;
                 case CHANGE:
+                    System.out.println(input[1] +" change " + input[2] +" " +input[3]);
+                    item = input[2];
+                    value = Double.valueOf(input[3]);
+                    applicationData.changeData(item , value);
                     break;
             }
 
             line = reader.readLine();
         }
+
     }
 
-    private static Observer checkChartType(String charType) {
+    private static Observer checkChartType(String charTypeStr) {
 
-        ChartType chartType = ChartType.toChartType(charType);
+        ChartType chartType = ChartType.toChartType(charTypeStr);
 
         if (null == chartType) {
             System.out.println("Input Error");
@@ -65,13 +74,13 @@ public class Main {
 
         switch (chartType) {
             case SPREAD:
-                observer = new SpreadSheet();
+                observer = new SpreadSheet(applicationData.getData());
                 break;
             case BAR:
-                observer = new BarChart();
+                observer = new BarChart(applicationData.getData());
                 break;
             case PIE:
-                observer = new PieChart();
+                observer = new PieChart(applicationData.getData());
                 break;
             default:
                 return null;

@@ -4,7 +4,7 @@ import java.util.Map;
 public enum ChartType {
     SPREAD("Spreadsheet"),
     BAR("BarChart"),
-    PIE("PieChart ");
+    PIE("PieChart");
 
     private String chartType;
 
