@@ -1,0 +1,15 @@
+Dora monkey 8
+donut dinner 20
+data mistake1
+data mistake2 abc
+data mistake3 123#
+data correctData 3
+data penPineappleApplePen 5
+addChart BarChart
+change cakeChart correctData 2
+Changing BarChart correctData 8
+change BarChart penPineappleApplePen 4
+addChart ntuChart
+addChart PieChart
+addChart 747 PieChart
+change PieChart newData 6

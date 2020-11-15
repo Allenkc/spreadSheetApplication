@@ -1,3 +1,4 @@
+// modify from java.util.observer
 public interface IObserver {
-    void update(Subject o, Object arg);
+    void update(ApplicationData o, Object arg);
 }

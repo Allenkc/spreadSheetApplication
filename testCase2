@@ -1,0 +1,11 @@
+data UFO 7
+data Good! 4
+data bi-directional 1
+data <(__)> 6
+data XDD 9
+data 9487 0
+addChart BarChart
+addChart Spreadsheet
+change Spreadsheet Bird 3
+change BarChart XDD 5
+change BarChart XDD 4
