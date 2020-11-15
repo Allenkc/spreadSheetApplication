@@ -8,16 +8,16 @@ import java.util.Vector;
 public class ApplicationData {
 
     private Map<String, Double> data;
-    private Vector<IObserver> obs;
+    private Vector<IObserver> observers;
     private boolean changed = false;
 
     public ApplicationData() {
-        obs = new Vector<>();
+        observers = new Vector<>();
     }
 
     public ApplicationData(Map<String, Double> data) {
         this.data = data;
-        obs = new Vector<>();
+        observers = new Vector<>();
     }
 
     public Map<String, Double> getData() {
@@ -45,7 +45,7 @@ public class ApplicationData {
 
             if (!changed)
                 return;
-            arrLocal = obs.toArray();
+            arrLocal = observers.toArray();
             clearChanged();
         }
 
@@ -57,8 +57,8 @@ public class ApplicationData {
     public synchronized void registerObserver(IObserver o) {
         if (o == null)
             throw new NullPointerException();
-        if (!obs.contains(o)) {
-            obs.addElement(o);
+        if (!observers.contains(o)) {
+            observers.addElement(o);
         }
     }
 
